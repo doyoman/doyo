@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import os
 
 provinces = ["hn","gd"]
-TOKEN = os.getenv("EU_BOT")
+TOKEN = os.getenv("Teacher_Token")
 ID = os.getenv("EU_ID")
 
 def send_messages(text):
