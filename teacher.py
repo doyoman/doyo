@@ -6,7 +6,7 @@ import telegram
 
 """
 为了适配青龙识别定时：
-cron "30 7 * * *"
+cron "30 7 * * *" script-path=https://github.com/doyoman/doyo/raw/main/teacher.py, tag=教师招聘信息爬虫
 new Env('教师招聘信息爬虫')
 """
 
