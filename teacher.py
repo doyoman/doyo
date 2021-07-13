@@ -3,6 +3,12 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
+"""
+为了适配青龙识别定时：
+cron "5 7 * * *" script-path=https://github.com/doyoman/doyo/raw/main/tracher.py, tag=教师招聘信息爬虫
+new Env('教师招聘信息爬虫')
+"""
+
 provinces = ["hn","gd"]
 TOKEN = os.getenv("Teacher_Token")
 ID = os.getenv("EU_ID")
