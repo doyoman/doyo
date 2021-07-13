@@ -4,6 +4,11 @@ from bs4 import BeautifulSoup
 import os
 import telegram
 
+"""
+为了适配青龙识别定时：
+cron "30 7 * * *" script-path=https://github.com/doyoman/doyo/raw/main/teacher.py, tag=教师招聘信息爬虫
+"""
+
 provinces = ["hn","gd"]
 TOKEN = os.getenv("EU_BOT")
 ID = os.getenv("EU_ID")
