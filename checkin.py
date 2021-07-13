@@ -5,7 +5,8 @@ import os
 
 """
 为了适配青龙识别定时：
-cron "5 7 * * *" script-path=https://github.com/doyoman/doyo/raw/main/checkin.py, tag=几鸡签到
+cron "5 7 * * *"
+new Env('几鸡签到')
 """
 
 ########################
