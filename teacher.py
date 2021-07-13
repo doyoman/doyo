@@ -2,18 +2,25 @@ import re
 import requests
 from bs4 import BeautifulSoup
 import os
-import telegram
-
-"""
-为了适配青龙识别定时：
-cron "30 7 * * *" script-path=https://github.com/doyoman/doyo/raw/main/teacher.py, tag=教师招聘信息爬虫
-new Env('教师招聘信息爬虫')
-"""
 
 provinces = ["hn","gd"]
 TOKEN = os.getenv("EU_BOT")
 ID = os.getenv("EU_ID")
-bot = telegram.Bot(token=TOKEN)
+
+def send_messages(text):
+    #telegram推送
+    bot_data = {
+                'chat_id': ID,
+                'text': text,
+                'parse_mode': 'Markdown'
+    }
+    url = "https://api.telegram.org/bot" + TOKEN + "/sendMessage"
+    rep = requests.post(url=url, data=bot_data)
+    if rep.status_code != 200:
+        print('telegram 推送失败')
+        print(rep.text)
+    else:
+        print('telegram 推送成功')
 
 for province in provinces:
     if province == "hn":
@@ -39,13 +46,11 @@ for province in provinces:
         for item in gonggao_list[0:6]:
             message = "\n".join(item)
             messages.append(message)
-        bot.send_message(chat_id=ID,text="\n----------\n".join(messages))
+        text = "\n----------\n".join(messages)
+        send_messages(text)
         if city == "zz":
             print("株洲信息发送完成！")
         elif city == "cs":
             print("长沙信息发送完成！")
         elif city == "gz":
             print("广州信息发送完成！")
-
-
-# print(text)
