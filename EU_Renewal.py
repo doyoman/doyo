@@ -6,7 +6,8 @@ from bs4 import BeautifulSoup
 
 """
 为了适配青龙识别定时：
-cron "20 7 15/24 * *" script-path=https://github.com/doyoman/doyo/raw/main/EU_Renewal.py, tag=EU续费
+cron "20 7 15/24 * *"
+new Env('EU续费')
 """
 
 USERNAME = os.environ["EU_USERNAME"]
