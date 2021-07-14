@@ -220,4 +220,5 @@ export_all_codes() {
     done
 }
 
+rm /ql/logs/code/*.log
 export_all_codes | perl -pe "{s|京东种豆|种豆|; s|crazyJoy任务|疯狂的JOY|}"
