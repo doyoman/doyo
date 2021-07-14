@@ -36,19 +36,19 @@ var_name=(
 )
 
 name_js=(
-  ${Author_Name}_jd_scripts_jd_fruit
-  ${Author_Name}_jd_scripts_jd_pet
-  ${Author_Name}_jd_scripts_jd_plantBean
-  ${Author_Name}_jd_scripts_jd_dreamFactory
-  ${Author_Name}_jd_scripts_jd_jdfactory
-  ${Author_Name}_jd_scripts_jd_jdzz
-  ${Author_Name}_jd_scripts_jd_crazy_joy
-  ${Author_Name}_jd_scripts_jd_jxnc
-  ${Author_Name}_jd_scripts_jd_bookshop
-  ${Author_Name}_jd_scripts_jd_cash
-  ${Author_Name}_jd_scripts_jd_sgmh
-  ${Author_Name}_jd_scripts_jd_cfd
-  ${Author_Name}_jd_scripts_jd_health
+  ${Repo_Name}_jd_fruit
+  ${Repo_Name}_jd_pet
+  ${Repo_Name}_jd_plantBean
+  ${Repo_Name}_jd_dreamFactory
+  ${Repo_Name}_jd_jdfactory
+  ${Repo_Name}_jd_jdzz
+  ${Repo_Name}_jd_crazy_joy
+  ${Repo_Name}_jd_jxnc
+  ${Repo_Name}_jd_bookshop
+  ${Repo_Name}_jd_cash
+  ${Repo_Name}_jd_sgmh
+  ${Repo_Name}_jd_cfd
+  ${Repo_Name}_jd_health
 )
 
 name_config=(
