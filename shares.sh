@@ -2,11 +2,11 @@
 
 rm /ql/log/code/*.log
 
-wait 1s
+wait
 
 task /ql/repo/doyoman_doyo/code.sh
 
-wait 1s
+wait
 
 sed -i "1i\#!/usr/bin/env bash"/ql/log/code/*.log
 
