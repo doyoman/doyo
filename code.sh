@@ -36,19 +36,19 @@ var_name=(
 )
 
 name_js=(
-  panghu999_jd_scripts_jd_fruit
-  panghu999_jd_scripts_jd_pet
-  panghu999_jd_scripts_jd_plantBean
-  panghu999_jd_scripts_jd_dreamFactory
-  panghu999_jd_scripts_jd_jdfactory
-  panghu999_jd_scripts_jd_jdzz
-  panghu999_jd_scripts_jd_crazy_joy
-  panghu999_jd_scripts_jd_jxnc
-  panghu999_jd_scripts_jd_bookshop
-  panghu999_jd_scripts_jd_cash
-  panghu999_jd_scripts_jd_sgmh
-  panghu999_jd_scripts_jd_cfd
-  panghu999_jd_scripts_jd_health
+  ${Author_Name}_jd_scripts_jd_fruit
+  ${Author_Name}_jd_scripts_jd_pet
+  ${Author_Name}_jd_scripts_jd_plantBean
+  ${Author_Name}_jd_scripts_jd_dreamFactory
+  ${Author_Name}_jd_scripts_jd_jdfactory
+  ${Author_Name}_jd_scripts_jd_jdzz
+  ${Author_Name}_jd_scripts_jd_crazy_joy
+  ${Author_Name}_jd_scripts_jd_jxnc
+  ${Author_Name}_jd_scripts_jd_bookshop
+  ${Author_Name}_jd_scripts_jd_cash
+  ${Author_Name}_jd_scripts_jd_sgmh
+  ${Author_Name}_jd_scripts_jd_cfd
+  ${Author_Name}_jd_scripts_jd_health
 )
 
 name_config=(
