@@ -30,7 +30,7 @@ def get_zlm():
         elif name == 'Jxmc':
             jxmc_log = os.popen('ls /ql/log/JDHelloWorld_jd_scripts_jd_jxmc | sed -n "1p"')
             jxmc = open(jxmc_log, encoding='utf-8').read()
-            text = '/jxmc' + '&'.join(re.findall('助力码： (.*?)', jxmc))
+            text = '/jxmc' + '&'.join(re.findall('助力码： (.*)', jxmc))
         else:
             text = name + '没有发现助力码！'
         send_message(text)
