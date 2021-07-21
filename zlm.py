@@ -42,7 +42,7 @@ def send_message(text):
         'text': text,
         'parse_mode': 'HTML'
     }
-    url = "https://api.telegram.org/bot" + bot_token + "/sendMessage"
+    url = "https://api.telegram.org/bot" + str(bot_token) + "/sendMessage"
     requests.post(url=url, data=bot_data)
 
 if __name__ == '__main__':
