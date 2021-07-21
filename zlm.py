@@ -9,34 +9,31 @@ def get_zlm():
     log_name = os.popen('ls /ql/log/code/*.log').read().replace('\n', '')
     f = open(log_name,'r',encoding='utf-8').read() #/ql/log/code/*.log
 
-    Name_List = ['Fruit', 'Pet', 'Bean', 'DreamFactory', 'JdFactory', 'Jxnc', 'Cash', 'Sgmh', 'Health']
-    # texts = []
+    Name_List = ['Fruit', 'Pet', 'Bean', 'DreamFactory', 'JdFactory', 'Sgmh', 'Health', 'Jxmc']
     for name in Name_List:
         ex = "My{}[0-9]*=\'(.*?)\'".format(name)
         zlm ='&'.join(re.findall(ex, f))
         if name == 'Fruit':
-            text = '<b>东东农场助力码：</b>\n/farm ' + zlm
+            text = '/farm ' + zlm #  <b>东东农场助力码：</b>\n
         elif name == 'Pet':
-            text = '<b>东东萌宠助力码：</b>\n/pet ' + zlm
+            text = '/pet ' + zlm #  <b>东东萌宠助力码：</b>\n
         elif name == 'Bean':
-            text = '<b>种豆得豆助力码：</b>\n/bean ' + zlm
+            text = '/bean ' + zlm #  <b>种豆得豆助力码：</b>\n
         elif name == 'DreamFactory':
-            text = '<b>京喜工厂助力码：</b>\n/jxfactory ' + zlm
+            text = '/jxfactory ' + zlm #  <b>京喜工厂助力码：</b>\n
         elif name == 'JdFactory':
-            text = '<b>东东工厂助力码：</b>\n/ddfactory ' + zlm
-        elif name == 'Jxnc':
-            text = '<b>京喜农场助力码：</b>\n' + zlm
-        elif name == 'Cash':
-            text = '<b>签到领现金助力码：</b>\n' + zlm
+            text = '/ddfactory ' + zlm #  <b>东东工厂助力码：</b>\n
         elif name == 'Sgmh':
-            text = '<b>闪购盲盒助力码：</b>\n/sgmh ' + zlm
+            text = '/sgmh ' + zlm #  <b>闪购盲盒助力码：</b>\n
         elif name == 'Health':
-            text = '<b>京东健康助力码：</b>\n/health ' + zlm
+            text = '/health ' + zlm #  <b>京东健康助力码：</b>\n
+        elif name == 'Jxmc':
+            jxmc_log = os.popen('ls /ql/log/JDHelloWorld_jd_scripts_jd_jxmc | sed -n "1p"')
+            jxmc = open(jxmc_log, encoding='utf-8').read()
+            text = '/jxmc' + '&'.join(re.findall('助力码： (.*?)', jxmc))
         else:
             text = name + '没有发现助力码！'
         send_message(text)
-        # texts.append(text)
-    # send_message('\n\n'.join(texts))
 
 def send_message(text):
     # telegram推送
