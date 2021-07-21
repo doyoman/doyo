@@ -28,7 +28,7 @@ def get_zlm():
         elif name == 'Health':
             text = '/health ' + zlm #  <b>京东健康助力码：</b>\n
         elif name == 'Jxmc':
-            jxmc_log = os.popen('ls /ql/log/JDHelloWorld_jd_scripts_jd_jxmc | sed -n "1p"')
+            jxmc_log = os.popen('ls /ql/log/JDHelloWorld_jd_scripts_jd_jxmc | sed -n "1p"').read().replace('\n', '')
             jxmc = open( '/ql/log/JDHelloWorld_jd_scripts_jd_jxmc/' + str(jxmc_log), encoding='utf-8').read()
             text = '/jxmc' + '&'.join(re.findall('助力码： (.*)', jxmc))
         else:
