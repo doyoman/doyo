@@ -7,7 +7,7 @@ chat_id = os.getenv('TG_USER_ID')
 
 def get_zlm():
     log_name = os.popen('ls /ql/log/code/*.log').read().replace('\n', '')
-    f = open(log_name,'r',encoding='utf-8').read() #/ql/log/code/*.log
+    f = open(log_name,'r',encoding='utf-8').read()
 
     Name_List = ['Fruit', 'Pet', 'Bean', 'DreamFactory', 'JdFactory', 'Sgmh', 'Health', 'Jxmc']
     for name in Name_List:
@@ -28,7 +28,7 @@ def get_zlm():
         elif name == 'Health':
             text = '/health ' + zlm #  <b>京东健康助力码：</b>\n
         elif name == 'Jxmc':
-            jxmc_log = os.popen('ls /ql/log/JDHelloWorld_jd_scripts_jd_jxmc | sed -n "1p"').read().replace('\n', '')
+            jxmc_log = os.popen('ls -r /ql/log/JDHelloWorld_jd_scripts_jd_jxmc | sed -n "1p"').read().replace('\n', '')
             jxmc = open('/ql/log/JDHelloWorld_jd_scripts_jd_jxmc/' + str(jxmc_log), encoding='utf-8').read()
             text = '/jxmc' + '&'.join(re.findall('助力码： (.*)', jxmc))
         else:
