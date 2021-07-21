@@ -10,7 +10,7 @@ def get_zlm():
     f = open(log_name,'r',encoding='utf-8').read() #/ql/log/code/*.log
 
     Name_List = ['Fruit', 'Pet', 'Bean', 'DreamFactory', 'JdFactory', 'Jxnc', 'Cash', 'Sgmh', 'Health']
-    texts = []
+    # texts = []
     for name in Name_List:
         ex = "My{}[0-9]*=\'(.*?)\'".format(name)
         zlm ='&'.join(re.findall(ex, f))
@@ -34,8 +34,9 @@ def get_zlm():
             text = '<b>京东健康助力码：</b>\n/health ' + zlm
         else:
             text = name + '没有发现助力码！'
-        texts.append(text)
-    send_message('\n\n'.join(texts))
+        send_message(text)
+        # texts.append(text)
+    # send_message('\n\n'.join(texts))
 
 def send_message(text):
     # telegram推送
