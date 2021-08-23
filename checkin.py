@@ -30,7 +30,7 @@ def checkin():
     #登录
     sess.post(url=login_url, headers=headers, data=data)
     #签到
-    checkin_url = "https://j05.space/user/checkin?c=" + str(random.random())
+    checkin_url = "https://a.luxury/user/checkin?c=" + str(random.random())
     checkin_response = sess.post(url=checkin_url,headers=headers).json()['msg']
 
     print(checkin_response)
