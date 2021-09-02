@@ -5,7 +5,7 @@ import time
 from send_message import send_message
 
 '''
-cron "30 0-23/6 * * *"
+cron: 30 0-23/6 * * *
 '''
 
 with open("./list.json", "r") as f:
