@@ -1,6 +1,8 @@
 import requests
 import os
 
+#用于仓库内脚本发送通知
+
 chat_id = os.getenv("EU_ID")
 bot_token = os.getenv("EU_BOT")
 
