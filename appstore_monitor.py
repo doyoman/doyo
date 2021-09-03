@@ -1,16 +1,11 @@
 import os
 import requests
-import json
 import time
 from send_message import send_message
 
 '''
 cron: 30 0-23/6 * * *
 '''
-
-#with open("./list.json", "r") as f:
-#    list = json.load(f)
-#    f.close()
 
 headers = {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Mobile/15E148 Safari/604.1"
