@@ -12,11 +12,11 @@ BARK_KEY = os.getenv("BARK_PUSH")
 ##############################
 
 def send_message(title,text):
-    print(title,text,"\n")
+    print(text,"\n")
     if len(BOT_TOKEN) != 0:    #telegram推送
         bot_data = {
             'chat_id': CHAT_ID,
-            'text': title + text,
+            'text': text,
             'parse_mode': 'html'
         }
         url = "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage"
@@ -26,7 +26,7 @@ def send_message(title,text):
         else:
             print('telegram 推送成功')
     if len(BARK_KEY) != 0:    #bark推送
-        rep = requests.post('https://api.day.app/' + BARK_KEY + '/' + title + "/" + text)
+        rep = requests.post('https://api.day.app/' + BARK_KEY + "/" + text)
         if rep.status_code != 200:
             print('Bark 推送失败')
         else:
