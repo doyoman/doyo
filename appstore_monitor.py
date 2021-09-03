@@ -17,8 +17,7 @@ headers = {
         }
 list_url = "https://raw.githubusercontent.com/doyoman/doyo/main/list.json"
 
-f = requests.get(list_url, headers)
-list = json.load(f)
+list = requests.get(list_url, headers).json()
 
 text_list = []
 
