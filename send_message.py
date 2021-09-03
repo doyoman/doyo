@@ -25,7 +25,7 @@ def send_message(text):
             print('telegram 推送失败')
         else:
             print('telegram 推送成功')
-    elif len(BARK_KEY) != 0:    #bark推送
+    if len(BARK_KEY) != 0:    #bark推送
         rep = requests.post('https://api.day.app/' + BARK_KEY + '/' + text)
         if rep.status_code != 200:
             print('Bark 推送失败')
