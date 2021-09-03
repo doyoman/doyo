@@ -34,5 +34,6 @@ for app in list:
     text_list.append(text)
 
 times = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-message = "AppStore价格监控:\n\n" + "\n".join(text_list) + "\n\n数据更新于 " + times
-send_message(message)
+title = "AppStore价格监控" 
+message = "\n\n" + "\n".join(text_list) + "\n\n数据更新于 " + times
+send_message(title, message)
