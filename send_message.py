@@ -11,7 +11,7 @@ BARK_KEY = os.getenv("BARK_PUSH")
 
 ##############################
 
-def send_message(title,text):
+def send_message(text):
     print(text,"\n")
     if len(BOT_TOKEN) != 0:    #telegram推送
         bot_data = {
