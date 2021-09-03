@@ -12,7 +12,7 @@ BARK_KEY = os.getenv("BARK_PUSH")
 ##############################
 
 def send_message(text):
-    print("\n",text,"\n")
+    print(text,"\n")
     if len(BOT_TOKEN) != 0:    #telegram推送
         bot_data = {
             'chat_id': CHAT_ID,
