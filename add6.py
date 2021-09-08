@@ -54,7 +54,6 @@ if __name__=='__main__':
     add6 = get_add6()
     token = get_token()
     rsp = search_env_name(token)
-    old_add6 = rsp['data'][0]['value']
     if len(rsp['data']) == 0:
         print('未找到所设环境变量！开始自动添加。')
         print('本地最新IPV6地址为：' + add6)
@@ -62,6 +61,7 @@ if __name__=='__main__':
         print('添加完成！')
     else:
         print('找到所设环境变量！')
+        old_add6 = rsp['data'][0]['value']
         print('本地最新IPV6地址为：' + add6)
         print('环境变量中存储的IPV6地址为：' + old_add6)
         if add6 == old_add6:
