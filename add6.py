@@ -38,6 +38,7 @@ def put_add6(token, add6, eid):
         'Content-Type': 'application/json;charset=UTF-8'
     }
     data = {"name": env_name, "value": add6, "_id": eid}
+    data = json.dumps(data)
     rsp = requests.put(url=url, headers=headers, data=data)
 
 def insert_add6(token, add6):
