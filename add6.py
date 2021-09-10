@@ -13,7 +13,7 @@ env_name = 'LOCAL_ADD6'
 
 def get_add6():
     output = os.popen('ifconfig').read()
-    add6 = re.findall(r'inet6 addr: (.*?) Scope:Global', output)[0].split('/')[0]
+    add6 = re.findall(r'inet6 addr: (.*?)/64 Scope:Global', output)[0]
     return add6
 
 def search_env_name(token):
