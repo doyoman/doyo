@@ -17,7 +17,7 @@ def get_add6():
     add6 = re.findall(r'inet6 addr: (.*?)/64 Scope:Global', output)[0]
     '''
     rsp = requests.get("http://checkipv6.dyndns.com")
-    add6 = re.findall(r".*<body>Current IP Address: (.*?)</body>.*", rsp.text)
+    add6 = re.findall(r".*<body>Current IP Address: (.*?)</body>.*", rsp.text)[0]
     return add6
 
 def search_env_name(token):
