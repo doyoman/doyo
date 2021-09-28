@@ -12,7 +12,10 @@ headers = {
         }
 list_url = "https://raw.githubusercontent.com/doyoman/doyo/main/list.json"
 
-list = requests.get(list_url, headers).json()
+try:
+    list = requests.get(list_url, headers).json()
+except:
+    list = requests.get("https://ghproxy.com/" + list_url, headers).json()
 
 text_list = []
 
