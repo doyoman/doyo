@@ -23,7 +23,9 @@ const $ = new API("jd_yjd");
     }
     await $.wait(getRndInteger(2,5) * 1000);
     let bodyj = JSON.parse(res.body);
+    console.log(bodyj);
     let taskItems = bodyj.data[0].taskItems;
+    console.log(taskItems);
     for (let task of taskItems) {
       let id = task.id;
       let title = task.title;
