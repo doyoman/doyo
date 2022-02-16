@@ -20,7 +20,7 @@ const $ = new API("jd_yjd");
       continue;
     } else {
       console.log(`${jd_pin}任务列表获取成功！等待中...`);
-      console.log(res.statusCode);
+      console.log(res.body);
     }
     await $.wait(getRndInteger(2,5) * 1000);
     let bodyj = JSON.parse(res.body);
