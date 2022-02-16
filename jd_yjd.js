@@ -23,7 +23,6 @@ const $ = new API("jd_yjd");
     }
     await $.wait(getRndInteger(2,5) * 1000);
     let bodyj = JSON.parse(res.body);
-    console.log(bodyj);
     let taskItems = bodyj.data[0].taskItems;
     for (let task of taskItems) {
       let id = task.id;
@@ -46,7 +45,7 @@ function getRndInteger(min, max) {
 }
 
 async function doTask(cookie, id) {
-  let url = `https://api.m.jd.com/?t=${Data.now()}&appid=vip_h5&functionId=vvipclub_doTask&body=%7B%22taskName%22:%22browseTask%22,%22taskItemId%22:${id}%7D`;
+  let url = `https://api.m.jd.com/?t=${Date.now()}&appid=vip_h5&functionId=vvipclub_doTask&body=%7B%22taskName%22:%22browseTask%22,%22taskItemId%22:${id}%7D`;
   let headers = {
     "Accept": "application/json",
     "Accept-Language": "zh-CN,zh-Hans;q=0.9",
