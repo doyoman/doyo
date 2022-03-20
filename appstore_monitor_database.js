@@ -1,3 +1,8 @@
+/*
+AppStore价格监控数据库版
+30 0-23/6 * * * appstore_monitor_database.js
+*/
+
 const axios = require("axios");
 const redis = require("redis");
 
