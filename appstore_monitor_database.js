@@ -114,8 +114,8 @@ async function sendMessage(message) {
         const data1 = {
             'chat_id': botId,
             'text': `*AppStore价格监控*
-  
-  ${message}`,
+
+${message}`,
             'parse_mode': 'markdown'
         };
         await axios.post(url1, data1);
