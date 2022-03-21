@@ -74,7 +74,8 @@ const redis = require("redis");
                         name: app.name,
                         oldprice: app.price,
                         newprice: j.price,
-                        symbol: app.symbol
+                        oldsymbol: app.symbol,
+                        newsymbol: j.symbol
                     }
                 } else {
                     return null;
@@ -95,7 +96,7 @@ const redis = require("redis");
 
         } else {
             console.log(`有${fls.length}个app价格发生变动！`);
-            const text = fls.map(i => `${i.name}：${i.oldprice}${i.symbol}  ==>  ${i.newprice}${i.symbol}`).join("\n");
+            const text = fls.map(i => `${i.name}：${i.oldprice}${i.oldsymbol}  ==>  ${i.newprice}${i.newsymbol}`).join("\n");
             console.log(text);
             await sendMessage(text);
         }
