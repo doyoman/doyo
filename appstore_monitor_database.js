@@ -58,7 +58,17 @@ const redis = require("redis");
     if (oldapps == null) {
         console.log("当前数据库中没有app价格数据。。。");
         const text = text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n");
-        // console.log(text);
+        console.log(text);
+        await sendMessage(text);
+    } else if (oldapps.length < text_list.length){
+        console.log("监控列表有新增。");
+        const text = text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n");
+        console.log(text);
+        await sendMessage(text);
+    } else if (oldapps.length > text_list.length) {
+        console.log("监控列表有删除。");
+        const text = text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n");
+        console.log(text);
         await sendMessage(text);
     } else {
         let fls;
@@ -82,7 +92,7 @@ const redis = require("redis");
         } else {
             console.log(`有${fls.length}个app价格发生变动！`);
             const text = fls.map(i => `${i.name}：${i.oldprice}${i.symbol}  ==>  ${i.newprice}${i.symbol}`).join("\n");
-            // console.log(text);
+            console.log(text);
             await sendMessage(text);
         }
 
