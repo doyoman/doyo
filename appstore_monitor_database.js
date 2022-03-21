@@ -109,7 +109,6 @@ async function sendMessage(message) {
     const botToken = process.env.EU_BOT;
     const botId = process.env.EU_ID;
     const barkKey = process.env.BARK_PUSH;
-
     if (barkKey) {
         const title = encodeURIComponent("AppStore价格监控");
         const text = encodeURIComponent(message);
@@ -119,7 +118,6 @@ async function sendMessage(message) {
             const url2 = `https://api.day.app/${barkKey}/${title}/${text}`;
             await axios.get(url2);
         }
-
     }
 
     if (botToken) {
@@ -133,5 +131,4 @@ ${message}`,
         };
         await axios.post(url1, data1);
     }
-
 }
