@@ -89,6 +89,7 @@ const redis = require("redis");
                 await client.set("force_send", "flase");
                 await client.expire("force_send", 86400);
             } else {
+                console.log(text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n"));
                 await sendMessage("所有app价格都没变！");
             }
 
