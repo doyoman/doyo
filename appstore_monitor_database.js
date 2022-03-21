@@ -66,7 +66,6 @@ const redis = require("redis");
         console.log(text);
         await sendMessage(text);
     } else {
-        console.log(oldapps.map(a => a.id).sort().toString(), text_list.map(b => b.id).sort().toString());
         let fls;
         for (const app of oldapps) {
             fls = text_list.map(j => {
