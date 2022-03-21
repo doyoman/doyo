@@ -60,13 +60,8 @@ const redis = require("redis");
         const text = text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n");
         console.log(text);
         await sendMessage(text);
-    } else if (oldapps.length < text_list.length){
-        console.log("监控列表有新增。");
-        const text = text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n");
-        console.log(text);
-        await sendMessage(text);
-    } else if (oldapps.length > text_list.length) {
-        console.log("监控列表有删除。");
+    } else if (oldapps.length != text_list.length || oldapps.map(a => a.id).sort().toString() != text_list.map(b => b.id).sort().toString()) {
+        console.log("监控列表发生变动。");
         const text = text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n");
         console.log(text);
         await sendMessage(text);
@@ -88,7 +83,15 @@ const redis = require("redis");
         }
         if (fls.length == 0) {
             console.log("所有价格未改变");
-            await sendMessage("所有app价格都没变！");
+            const force_send = await client.get("force_send");
+            if (force_send == null) {
+                await sendMessage(text_list.map(i => `${i.name}：${i.price}${i.symbol}`).join("\n"));
+                await client.set("force_send", "flase");
+                await client.expire("force_send", 86400);
+            } else {
+                await sendMessage("所有app价格都没变！");
+            }
+
         } else {
             console.log(`有${fls.length}个app价格发生变动！`);
             const text = fls.map(i => `${i.name}：${i.oldprice}${i.symbol}  ==>  ${i.newprice}${i.symbol}`).join("\n");
