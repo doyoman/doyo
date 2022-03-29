@@ -8,7 +8,8 @@
 
 安装方法：
 前提装好了node和npm
-npm install axios express pm2
+npm install axios express
+npm install pm2 -g
 pm2 start 809_Converter_Server.js
 
 使用方法
