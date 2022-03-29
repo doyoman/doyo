@@ -58,9 +58,13 @@ async function reVmess(vmessLi) {
     for (let item of v) {
         item = JSON.parse(item);
         const fakeid = getFakeID();
-        const { add, port, ps } = item;
+        let { add, port, ps, path } = item;
+        if (/\/if5ax\//.test(path)) {
+          add = path.match(/.*&spip=(.*?)&.*/)[1];
+          port = path.match(/.*&spport=(.*?)&.*/)[1];
+        }
         const url = await getUrl(add, port, fakeid);
-        const path = url.split(":809")[1];
+        path = url.split(":809")[1];
         const ip = url.split(":809")[0].replace(/http:\/\//, "");
         n += 1;
         item = {
