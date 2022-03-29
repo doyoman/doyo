@@ -1,3 +1,26 @@
+/*
+###readme
+联通809免流转换（测试）
+每次更新订阅都会获取最新的免流参数
+免流前提是你的节点服务端xray支持免流
+
+在线url编码网站：http://www.jsons.cn/urlencode/
+
+安装方法：
+前提装好了node和npm
+npm install axios express pm2
+pm2 start 809_Converter_Server.js
+
+使用方法
+订阅链接：
+http://你的IP:3000/sub?sublink=加上经过url编码的订阅链接
+
+vmess链接：
+http://你的IP:3000/sub?vmess=加上经过url编码的vmess链接，可以添加多个，url编码时换行隔开
+
+拼接好的url就是新的订阅链接，在软件上手动或定时更新即可
+*/
+
 const axios = require("axios");
 const crypto = require('crypto');
 const express = require("express");
