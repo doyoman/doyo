@@ -8,9 +8,11 @@
 
 安装方法：
 前提装好了node和npm
-npm install axios express
-npm install pm2 -g
-pm2 start 809_Converter_Server.js
+1、mkdir 809sub && cd 809sub
+2、wget https://raw.githubusercontent.com/doyoman/doyo/main/809_Converter_Server.js
+3、npm install axios express
+4、npm install pm2 -g
+5、pm2 start 809_Converter_Server.js
 
 使用方法：
 一把梭
