@@ -12,12 +12,11 @@ npm install axios express
 npm install pm2 -g
 pm2 start 809_Converter_Server.js
 
-使用方法
-订阅链接：
-http://你的IP:3000/sub?sublink=加上经过url编码的订阅链接
+使用方法：
+一把梭
+http://你的IP:3000/sub?sublink=加上经过url编码的vmess链接或订阅链接，可以添加多个，url编码时换行隔开
 
-vmess链接：
-http://你的IP:3000/sub?vmess=加上经过url编码的vmess链接，可以添加多个，url编码时换行隔开
+！注意，添加太多链接会导致url过长
 
 拼接好的url就是新的订阅链接，在软件上手动或定时更新即可
 */
@@ -30,17 +29,16 @@ const app = express();
 
 app.get('/sub', async function (req, res) {
 try {
-    if (req.query.vmess) {
-        const vmessDataLi = req.query.vmess.split("vmess://").filter(i => i && i.trim()).map(item => deBase64(item));
-        const reVmessLi = await reVmess(vmessDataLi);
+    if (req.query.sublink && req.query.sublink.length != 0) {
+        //console.log(req.query.sublink);
+        const linkLi = req.query.sublink.split("\n");
+        console.log(linkLi)
+        const vmessLi = await getVmess(linkLi);
+        const reVmessLi = await reVmess(vmessLi);
         const text = enBase64(reVmessLi.join("\n"));
         res.send(text);
-    } else if (req.query.sublink) {
-        console.log(req.query.sublink);
-        const data = await getSub(req.query.sublink);
-        const reVmessLi = await reVmess(data);
-        const text = enBase64(reVmessLi.join("\n"));
-        res.send(text);
+    } else {
+        res.send("请在sublink=后加上你经过url编码的订阅链接或vmess链接,如有多个请在编码前以换行符隔开。")
     }
 } catch (error) {
     console.log(error);
@@ -104,13 +102,21 @@ async function reVmess(vmessLi) {
     return reVmessLi
 }
 
-async function getSub(subLink) {
-    const data = await axios.get(subLink).then(rsp => rsp.data);
-    const vmessLi = deBase64(data).split("\n").filter(item => /vmess:\/\//.test(item));
-    return vmessLi.map(i => {
-        i = i.replace(/[\r\n]/g, "").replace(/vmess:\/\//, "");
-        return deBase64(i)
-    })
+async function getVmess(linkLi) {
+    let vmessLi = [];
+    for (link of linkLi) {
+        if (/vmess:\/\//.test(link)) {
+            vmessLi.push(deBase64(link.replace(/vmess:\/\//, "")));
+        } else if (/http:\/\//.test(link) || /https:\/\//.test(link)) {
+            const data = await axios.get(link).then(rsp => rsp.data)
+            const sub = deBase64(data).split("\n").filter(item => /vmess:\/\//.test(item));
+            for (let j of sub) {
+                j = j.replace(/[\r\n]/g, "").replace(/vmess:\/\//, "");
+                vmessLi.push(deBase64(j));
+            }
+        }
+    }
+    return vmessLi;
 }
 
 function getMd5(str) {
