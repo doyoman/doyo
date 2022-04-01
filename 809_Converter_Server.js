@@ -6,7 +6,10 @@
 
 在线url编码网站：http://www.jsons.cn/urlencode/
 
-安装方法：
+我建的(开直接使用)：
+https://mianliu.doyo.workers.dev/?sublink=加上经过url编码的vmess链接或订阅链接，可以添加多个，url编码时换行隔开
+
+自建指南：
 前提装好了node和npm
 1、mkdir 809sub && cd 809sub
 2、wget https://raw.githubusercontent.com/doyoman/doyo/main/809_Converter_Server.js
@@ -15,7 +18,7 @@
 5、pm2 start 809_Converter_Server.js
 
 使用方法：
-一把梭
+一把唆
 http://你的IP:3000/sub?sublink=加上经过url编码的vmess链接或订阅链接，可以添加多个，url编码时换行隔开
 
 ！注意，添加太多链接会导致url过长
