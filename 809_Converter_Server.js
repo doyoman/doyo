@@ -6,7 +6,7 @@
 
 在线url编码网站：http://www.jsons.cn/urlencode/
 
-我建的(开直接使用)：
+我建的(可直接使用)：
 https://mianliu.doyo.workers.dev/?sublink=加上经过url编码的vmess链接或订阅链接，可以添加多个，url编码时换行隔开
 
 自建指南：
@@ -35,11 +35,15 @@ const app = express();
 app.get('/sub', async function (req, res) {
 try {
     if (req.query.sublink && req.query.sublink.length != 0) {
-        //console.log(req.query.sublink);
         const linkLi = req.query.sublink.split("\n");
         console.log(linkLi)
         const vmessLi = await getVmess(linkLi);
-        const reVmessLi = await reVmess(vmessLi);
+        const vmessS = vmessLi.filter(i => i && i.trim());
+        let i = 0;
+        const reVmessLi = await Promise.all(vmessS.map(v => {
+          i++;
+          return reVmess(v, i)
+        }));
         const text = enBase64(reVmessLi.join("\n"));
         res.send(text);
     } else {
@@ -78,33 +82,27 @@ function getUrl(spip, spport, fakeid) {
     return axios.get(url, options).then(rsp => rsp.data.url);
 }
 
-async function reVmess(vmessLi) {
-    let reVmessLi = [];
-    let n = 0;
-    const v = vmessLi.filter(i => i && i.trim());
-    for (let item of v) {
-        item = JSON.parse(item);
-        const fakeid = getFakeID();
-        let { add, port, ps, path } = item;
-        if (/\/if5ax\//.test(path)) {
-          add = path.match(/.*&spip=(.*?)&.*/)[1];
-          port = path.match(/.*&spport=(.*?)&.*/)[1];
-        }
-        const url = await getUrl(add, port, fakeid);
-        path = url.split(":809")[1];
-        const ip = url.split(":809")[0].replace(/http:\/\//, "");
-        n += 1;
-        item = {
-            ...item,
-            add: ip,
-            port: 809,
-            host: ip,
-            path: path,
-            ps: `${ps}-联通809免流${n}`
-        }
-        reVmessLi.push("vmess://" + enBase64(JSON.stringify(item)));
+async function reVmess(v, n) {
+    let item = JSON.parse(v);
+    const fakeid = getFakeID();
+    let { add, port, ps, path } = item;
+    if (/\/if5ax\//.test(path)) {
+      add = path.match(/.*&spip=(.*?)&.*/)[1];
+      port = path.match(/.*&spport=(.*?)&.*/)[1];
     }
-    return reVmessLi
+    const url = await getUrl(add, port, fakeid);
+    path = url.split(":809")[1];
+    const ip = url.split(":809")[0].replace(/http:\/\//, "");
+    item = {
+        ...item,
+        add: ip,
+        port: 809,
+        host: ip,
+        path: path,
+        ps: `${ps}-联通809免流${n}`
+    }
+    const text = "vmess://" + enBase64(JSON.stringify(item));
+    return text;
 }
 
 async function getVmess(linkLi) {
