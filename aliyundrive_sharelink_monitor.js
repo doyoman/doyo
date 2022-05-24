@@ -127,7 +127,7 @@ async function sendMessage(message, content="", url="") {
       }
     }
   }else{
-    $.notify(title, message, content, {"open-url": url});
+    $.notify($.name, message, content, {"open-url": url});
   }
 }
 
