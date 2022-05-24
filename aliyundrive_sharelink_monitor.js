@@ -12,7 +12,7 @@ const $ = API("aliyundrive链接监控", true);
   if ($.env.isNode){
     var share_links = process.env.al_share_links || [];
   }else{
-    var share_links = $.read("share_links");
+    share_links = $.read("share_links") || share_links;
   }
   if (share_links.length == 0){
     await sendMessage("请添加分享链接...");
