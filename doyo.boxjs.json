@@ -8,10 +8,10 @@
     {
       "id": "aliyun",
       "name": "aliyun 监控",
-      "keys": ["@github.repo"],
+      "keys": ["@aliyundrive_sharelink_monitor.share_links"],
       "settings": [
         {
-          "id": "@github.token",
+          "id": "@aliyundrive_sharelink_monitor.share_links",
           "name": "aliyun分享链接",
           "val": "",
           "type": "text",
