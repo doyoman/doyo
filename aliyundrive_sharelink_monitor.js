@@ -3,6 +3,8 @@
 0 0-23/3 * * * https://raw.githubusercontent.com/doyoman/doyo/main/aliyundrive_sharelink_monitor.js, tag=aliyundrive分享链接更新监控, img-url=eye.fill.system, enabled=true
 */
 
+let share_links = "";
+
 const $ = API("aliyundrive链接监控", true);
 
 (async () => {
@@ -10,7 +12,7 @@ const $ = API("aliyundrive链接监控", true);
   if ($.env.isNode){
     var share_links = process.env.al_share_links || [];
   }else{
-    var share_links = "";
+    //var share_links = "";
   }
   if (share_links.length == 0){
     await sendMessage("请添加分享链接...");
