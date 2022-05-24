@@ -10,9 +10,9 @@ const $ = API("aliyundrive链接监控", true);
 (async () => {
   $.log("begin...");
   if ($.env.isNode){
-    share_links = process.env.al_share_links || [];
+    share_links = process.env.al_share_links || share_links;
   }else{
-    share_links = $.read("share_links") || share_links;
+    share_links = $.read("#share_links") || share_links;
   }
   if (share_links.length == 0){
     await sendMessage("请添加分享链接...");
@@ -50,7 +50,7 @@ const $ = API("aliyundrive链接监控", true);
         $.write(items.length, share_id);
         await sendMessage(`您监控的第${i}个阿里云盘分享资源有更新啦！`, "点我前去查看...", link);
       }else{
-        await sendMessage(`您监控的第${i}个阿里云盘分享资源没有更新!`, "点我前去查看...", link)
+        await sendMessage(`您监控的第${i}个阿里云盘分享资源没有更新!`, "点我前去查看...", link);
       }
     }else{
       $.write(items.length, share_id);
@@ -59,6 +59,7 @@ const $ = API("aliyundrive链接监控", true);
     await $.wait(2000);
     i++
   }
+  $.done();
 })();
 
 async function getToken(share_id, share_pwd) {
