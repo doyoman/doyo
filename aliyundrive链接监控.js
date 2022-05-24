@@ -32,11 +32,9 @@ const share_link_list = "https://www.aliyundrive.com/s/TJ2iYc87B3b/folder/627a56
       if ($.read(share_id) !== items.length){
         $.write(items.length, share_id);
         $.notify($.name, `您监控的第${i}个阿里云盘分享资源有更新啦！`, "点我前去查看...", {"open-url": link});
-        
       }else{
         $.notify($.name, `您监控的第${i}个阿里云盘分享资源没有更新!`, "点我前去查看...", {"open-url": link})
       }
-      
     }else{
       $.write(items.length, share_id);
       $.notify($.name, `您监控的第${i}个阿里云盘分享链接共有${items.length}个文件或文件夹！`, "点我前去查看...", {"open-url": link})
@@ -44,10 +42,7 @@ const share_link_list = "https://www.aliyundrive.com/s/TJ2iYc87B3b/folder/627a56
     $.wait(2000);
     i++
   }
-  
-  
 })();
-
 
 async function getToken(share_id, share_pwd) {
   const rawbody = JSON.stringify({
@@ -87,7 +82,6 @@ function getFileList(share_token, share_id, parent_file_id) {
     'Accept': 'application/json, text/plain, */*',
     'X-Canary': 'client=web,app=adrive,version=v2.3.1',
     'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-
     'Content-Type': 'application/json;charset=utf-8',
     'Origin': 'https://www.aliyundrive.com',
     'Content-Length': rawbody.length,
