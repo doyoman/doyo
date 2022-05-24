@@ -7,7 +7,7 @@ let share_links = "";
 
 const $ = new Env("aliyundrive链接监控");
 
-(async () => {
+!(async () => {
   if ($.isNode()){
     share_links = process.env.al_share_links || share_links;
   }else{
@@ -57,8 +57,9 @@ const $ = new Env("aliyundrive链接监控");
     await $.wait(2000);
     i++
   }
-  $.done();
-})();
+})()
+    .catch((e) => $.logErr(e))
+    .finally(() => $.done())
 
 async function getToken(share_id, share_pwd) {
   const rawbody = JSON.stringify({
@@ -117,7 +118,7 @@ function getFileList(share_token, share_id, parent_file_id) {
 }
 
 async function sendMessage(message, content="", url="") {
-  if ($.env.isNode){
+  if ($.isNode()){
     const barkKey = process.env.BARK_PUSH || "";
     if (barkKey) {
       if (/http/.test(barkKey)) {
