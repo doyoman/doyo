@@ -10,7 +10,7 @@ const $ = API("aliyundrive链接监控", true);
 (async () => {
   $.log("begin...");
   if ($.env.isNode){
-    var share_links = process.env.al_share_links || [];
+    share_links = process.env.al_share_links || [];
   }else{
     share_links = $.read("share_links") || share_links;
   }
