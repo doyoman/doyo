@@ -46,8 +46,8 @@ const $ = new Env("aliyundrive链接监控");
     const share_token = await getToken(share_id, share_pwd);
     const items = await getFileList(share_token, share_id, parent_file_id);
     if ($.getdata(share_id)) {
-      if ($.getdata(share_id) !== items.length){
-        $.setdata(items.length, share_id);
+      if ($.getdata(share_id) != items.length){
+        $.setdata((items.length).toString(), share_id);
         await sendMessage(`您监控的第${i}个阿里云盘分享资源有更新啦！`, "点我前去查看...", link);
       }else{
         if (not_upload_notify){
@@ -56,7 +56,7 @@ const $ = new Env("aliyundrive链接监控");
         $.log(`您监控的第${i}个阿里云盘分享资源没有更新!`)
       }
     }else{
-      $.setdata(items.length, share_id);
+      $.setdata((items.length).toString(), share_id);
       await sendMessage(`您监控的第${i}个阿里云盘分享链接共有${items.length}个文件或文件夹！`, "点我前去查看...", link)
     }
     await $.wait(2000);
