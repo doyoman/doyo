@@ -1,6 +1,6 @@
 /*
 [task_local]
-0 0-23/3 * * * https://raw.githubusercontent.com/doyoman/doyo/main/aliyundrive_sharelink_monitor.js, tag=aliyundrive分享链接更新监控, img-url=eye.fill.system, enabled=true
+0 0-23/1 * * * https://raw.githubusercontent.com/doyoman/doyo/main/aliyundrive_sharelink_monitor.js, tag=aliyundrive分享链接更新监控, img-url=eye.fill.system, enabled=true
 */
 
 let share_links = "";
