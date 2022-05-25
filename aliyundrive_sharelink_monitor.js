@@ -4,6 +4,7 @@
 */
 
 let share_links = "";
+let not_upload_notify = false;
 
 const $ = new Env("aliyundrive链接监控");
 
@@ -49,7 +50,10 @@ const $ = new Env("aliyundrive链接监控");
         $.setdata(items.length, share_id);
         await sendMessage(`您监控的第${i}个阿里云盘分享资源有更新啦！`, "点我前去查看...", link);
       }else{
-        await sendMessage(`您监控的第${i}个阿里云盘分享资源没有更新!`, "点我前去查看...", link);
+        if (not_upload_notify){
+        	await sendMessage(`您监控的第${i}个阿里云盘分享资源没有更新!`, "点我前去查看...", link);
+        }
+        $.log(`您监控的第${i}个阿里云盘分享资源没有更新!`)
       }
     }else{
       $.setdata(items.length, share_id);
