@@ -22,7 +22,6 @@ const $ = new Env("aliyundrive链接监控");
   const share_link_list = share_links.split("&") || share_links.split("\n");
   $.log(`共有${share_link_list.length}条监控链接！`);
   const share_list = [];
-  const share_pwd = "";
   for (link of share_link_list){
     if (/folder/.test(link)){
       const info = link.match(/.*com\/s\/(.*)\/folder\/(.*)/);
@@ -43,20 +42,22 @@ const $ = new Env("aliyundrive链接监控");
   let i = 1;
   for (share of share_list){
     const {link, share_id, parent_file_id} = share;
-    const share_token = await getToken(share_id, share_pwd);
+    const share_token = await getToken(share_id);
     const items = await getFileList(share_token, share_id, parent_file_id);
-    if ($.getdata(share_id)) {
-      if ($.getdata(share_id) != items.length){
-        $.setdata((items.length).toString(), share_id);
-        await sendMessage(`您监控的第${i}个阿里云盘分享资源有更新啦！`, "点我前去查看...", link);
-      }else{
-        if (not_upload_notify){
-        	await sendMessage(`您监控的第${i}个阿里云盘分享资源没有更新!`, "点我前去查看...", link);
-        }
+    const name_list = items.map(v => v.name);
+    if ($.getjson(share_id)) {
+      const new_share = name_list.filter(i => $.getjson(share_id).indexOf(i) == -1)
+      if (new_share.length == 0){
         $.log(`您监控的第${i}个阿里云盘分享资源没有更新!`)
+        if (not_upload_notify){
+          await sendMessage(`您监控的第${i}个阿里云盘分享资源没有更新!`, "点我前去查看...", link);
+        }
+      }else{
+        $.setjson(name_list, share_id)
+        await sendMessage(`您监控的第${i}个阿里云盘分享资源有更新啦！\n${new_share.join("\n")}`, "点我前去查看...", link);
       }
     }else{
-      $.setdata((items.length).toString(), share_id);
+      $.setjson(name_list, share_id);
       await sendMessage(`您监控的第${i}个阿里云盘分享链接共有${items.length}个文件或文件夹！`, "点我前去查看...", link)
     }
     await $.wait(2000);
@@ -66,7 +67,7 @@ const $ = new Env("aliyundrive链接监控");
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
 
-async function getToken(share_id, share_pwd) {
+async function getToken(share_id, share_pwd="") {
   const rawbody = JSON.stringify({
   "share_id" : share_id,
   "share_pwd" : share_pwd
