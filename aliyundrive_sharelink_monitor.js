@@ -46,7 +46,7 @@ const $ = new Env("aliyundrive链接监控");
     const items = await getFileList(share_token, share_id, parent_file_id);
     const name_list = items.map(v => v.name);
     if ($.getjson(share_id)) {
-      const new_share = name_list.filter(i => $.getjson(share_id).indexOf(i) == -1)
+      const new_share = name_list.filter(i => ($.getjson(share_id)).indexOf(i) == -1)
       if (new_share.length == 0){
         $.log(`您监控的第${i}个阿里云盘分享资源没有更新!`)
         if (not_upload_notify){
