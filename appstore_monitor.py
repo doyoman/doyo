@@ -1,4 +1,3 @@
-import os
 import requests
 import time
 from send_message import send_message
@@ -23,17 +22,16 @@ for app in list:
     app_id = app["id"]
     app_country = app["country"]
     app_name = app["name"]
-    url = "https://itunes.apple.com/lookup?id={}&country={}".format(app_id, app_country)
-    price = requests.get(url=url, headers=headers).json()['results'][0]['price']
-    if app_country == "cn":
-        symbol = "¥"
-    elif app_country == "us":
-        symbol = "$"
-    else:
-        print("此国家金额标识未添加！")
-    text = "{}   ==>   {}{}".format(app_name, price, symbol)
+    url = f"https://itunes.apple.com/lookup?id={app_id}&country={app_country}"
+    try:
+        rsp = requests.get(url=url, headers=headers).json()
+        price = rsp['results'][0]['formattedPrice']
+        text = f"{app_name}   ==>   {price}"
+    except:
+        text = f"{app_name}   ==>   查询失败！"
     text_list.append(text)
 
 times = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 message = "AppStore价格监控:\n\n" + "\n".join(text_list) + "\n\n数据更新于 " + times
+print(message)
 send_message(message)
