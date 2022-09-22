@@ -5,8 +5,8 @@ import os
 
 ########获取环境变量##########
 
-CHAT_ID = os.getenv("EU_ID")
-BOT_TOKEN = os.getenv("EU_BOT")
+CHAT_ID = os.getenv("TG_ID")
+BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
 BARK_KEY = os.getenv("BARK_PUSH")
 
 ##############################
