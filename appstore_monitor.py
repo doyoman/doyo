@@ -1,6 +1,6 @@
 import requests
 import time
-from send_message import send_message
+from notify import send
 
 '''
 cron: 30 0-23/6 * * *
@@ -32,6 +32,6 @@ for app in list:
     text_list.append(text)
 
 times = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-message = "AppStore价格监控:\n\n" + "\n".join(text_list) + "\n\n数据更新于 " + times
+message = "\n".join(text_list) + "\n\n数据更新于 " + times
 print(message)
-send_message(message)
+send("AppStore价格监控:", message)
