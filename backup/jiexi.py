@@ -32,6 +32,6 @@ if __name__ == "__main__":
     rsp = jiexi(link)
     file_name = rsp["url"].split("/")[-1]
     if file_name =="":
-        file_name = link.split("/")[-2]
+        file_name = rsp["url"].split("/")[-2]
     print(rsp["video"])
     download(rsp["video"], file_name)
