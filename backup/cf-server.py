@@ -52,22 +52,25 @@ def main(sub_url):
         return list
 
     def re_vmess(vmess):
-        dic = json.loads(str(base64.b64decode(vmess[8:]), "utf-8"))
         SW = []
         if LT_list:
-            dic["add"] = choice(LT_list)
-            dic["ps"] = dic["ps"] + "-联通优选"
-            SW.append("vmess://" + str(base64.b64encode(json.dumps(dic, ensure_ascii=False).encode()), "utf-8"))
+            dic1 = json.loads(str(base64.b64decode(vmess[8:]), "utf-8"))
+            dic1["add"] = choice(LT_list)
+            dic1["ps"] = dic1["ps"] + "-联通优选"
+            
+            SW.append("vmess://" + str(base64.b64encode(json.dumps(dic1, ensure_ascii=False).encode()), "utf-8"))
         
         if DX_list:
-            dic["add"] = choice(DX_list)
-            dic["ps"] = dic["ps"] + "-电信优选"
-            SW.append("vmess://" + str(base64.b64encode(json.dumps(dic, ensure_ascii=False).encode()), "utf-8"))
+            dic2 = json.loads(str(base64.b64decode(vmess[8:]), "utf-8"))
+            dic2["add"] = choice(DX_list)
+            dic2["ps"] = dic2["ps"] + "-电信优选"
+            SW.append("vmess://" + str(base64.b64encode(json.dumps(dic2, ensure_ascii=False).encode()), "utf-8"))
         
         if YD_list:
-            dic["add"] = choice(YD_list)
-            dic["ps"] = dic["ps"] + "-移动优选"
-            SW.append("vmess://" + str(base64.b64encode(json.dumps(dic, ensure_ascii=False).encode()), "utf-8"))
+            dic3 = json.loads(str(base64.b64decode(vmess[8:]), "utf-8"))
+            dic3["add"] = choice(YD_list)
+            dic3["ps"] = dic3["ps"] + "-移动优选"
+            SW.append("vmess://" + str(base64.b64encode(json.dumps(dic3, ensure_ascii=False).encode()), "utf-8"))
         
         return SW
 
