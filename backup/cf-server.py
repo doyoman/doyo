@@ -16,6 +16,9 @@ app = Flask(__name__)
 def Converter():
     if request.args.get("sub") is None:
         return "链接格式不正确，请在url后衔接订阅链接，如/?sub=http://xxxxxx"
+
+    if request.args.get("me"):
+        return main(request.args.get("sub"), me=True)
     return main(request.args.get("sub"))
 
 
@@ -43,7 +46,7 @@ def Receive_YS():
     request.files.get("result.csv").save("YD.csv")
     return "ok"
 
-def main(sub_url):
+def main(sub_url, me=False):
     def get_sub(url):
         rsp = requests.get(url)
         b_list = base64.b64decode(rsp.text)
@@ -74,10 +77,32 @@ def main(sub_url):
         
         return SW
 
+    def get_GY_ip():
+        url = "https://api.hostmonit.com/get_optimization_ip"
+        payload = "{\"key\":\"iDetkOys\"}"
+        headers = {
+        'Content-Type': 'text/plain'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        return response.json()
+
     def get_cf_ip():
         LT_list = []
         DX_list = []
         YD_list = []
+
+        if not me:
+            rsp = get_GY_ip()
+            for i in rsp["info"]:
+                if i["line"] == "CM":
+                    YD_list.append(i["ip"])
+                elif i["line"] == "CU":
+                    LT_list.append(i["ip"])
+                elif i["line"] == "CT":
+                    DX_list.append(i["ip"])
+            return LT_list,DX_list,YD_list
+
         if os.path.exists("./LT.csv"):
             with open(r'LT.csv', encoding='utf-8')as f:
                 reader = csv.reader(f)
