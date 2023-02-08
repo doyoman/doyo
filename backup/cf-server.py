@@ -17,9 +17,10 @@ def Converter():
     if request.args.get("sub") is None:
         return "链接格式不正确，请在url后衔接订阅链接，如/?sub=http://xxxxxx"
 
-    if request.args.get("me"):
-        return main(request.args.get("sub"), me=True)
-    return main(request.args.get("sub"))
+    # if request.args.get("me"):
+    #     return main(request.args.get("sub"), me=True)
+    
+    return main(request.args)
 
 
 @app.route("/LT_ip", methods=["POST"])
@@ -46,7 +47,8 @@ def Receive_YS():
     request.files.get("result.csv").save("YD.csv")
     return "ok"
 
-def main(sub_url, me=False):
+def main(parameter):
+    
     def get_sub(url):
         rsp = requests.get(url)
         b_list = base64.b64decode(rsp.text)
@@ -132,8 +134,32 @@ def main(sub_url, me=False):
 
         return LT_list,DX_list,YD_list
 
+    sub_url = parameter.get("sub")
+    me = parameter.get("me")
+    need = parameter.get("need")
+
     sub = get_sub(sub_url)
     LT_list,DX_list,YD_list = get_cf_ip()
+
+    if sorted(json.loads(need)) == sorted(["DX","LT","YD"]):
+        pass
+    elif sorted(json.loads(need))  == sorted(["DX","LT"]):
+        YD_list = []
+    elif sorted(json.loads(need)) == sorted(["DX","YD"]):
+        LT_list = []
+    elif sorted(json.loads(need)) == sorted["LT","YD"]:
+        DX_list = []
+    elif sorted(json.loads(need)) == sorted(["DX"]):
+        LT_list = []
+        YD_list = []
+    elif sorted(json.loads(need)) == sorted(["LT"]):
+        DX_list = []
+        YD_list = []
+    elif sorted(json.loads(need)) == sorted(["YD"]):
+        DX_list = []
+        LT_list = []
+
+
     new_sub_list = []
     for vmess in sub:
         new_vmessS = re_vmess(vmess)
