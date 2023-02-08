@@ -147,7 +147,7 @@ def main(parameter):
         YD_list = []
     elif sorted(json.loads(need)) == sorted(["DX","YD"]):
         LT_list = []
-    elif sorted(json.loads(need)) == sorted["LT","YD"]:
+    elif sorted(json.loads(need)) == sorted(["LT","YD"]):
         DX_list = []
     elif sorted(json.loads(need)) == sorted(["DX"]):
         LT_list = []
