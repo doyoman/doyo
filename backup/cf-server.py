@@ -136,7 +136,7 @@ def main(parameter):
 
     sub_url = parameter.get("sub")
     me = parameter.get("me")
-    need = parameter.get("need")
+    need = parameter.get("need") or "[]"
 
     sub = get_sub(sub_url)
     LT_list,DX_list,YD_list = get_cf_ip()
@@ -173,4 +173,4 @@ def main(parameter):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=2087)
+    app.run(host="0.0.0.0", port=80)
