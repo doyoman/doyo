@@ -22,6 +22,14 @@ def Converter():
     
     return main(request.args)
 
+@app.route('/b64')
+def b64():
+    if request.args.get("sub") is None:
+        return "链接格式不正确，请在url后衔接订阅链接，如/?sub=http://xxxxxx"
+
+    rsp = requests.get(request.args.get("sub"))
+
+    return rsp.text
 
 @app.route("/LT_ip", methods=["POST"])
 def Receive_LT():
@@ -46,6 +54,7 @@ def Receive_YS():
 
     request.files.get("result.csv").save("YD.csv")
     return "ok"
+
 
 def main(parameter):
     
@@ -140,7 +149,7 @@ def main(parameter):
 
     sub = get_sub(sub_url)
     LT_list,DX_list,YD_list = get_cf_ip()
-
+    
     if sorted(json.loads(need)) == sorted(["DX","LT","YD"]):
         pass
     elif sorted(json.loads(need))  == sorted(["DX","LT"]):
@@ -173,4 +182,4 @@ def main(parameter):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=2087)
