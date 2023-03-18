@@ -1,0 +1,3 @@
+IP-CIDR,192.168.2.0/24,no-resolve
+IP-CIDR,192.168.10.0/24,no-resolve
+IP-CIDR,10.10.10.10/32,no-resolve
