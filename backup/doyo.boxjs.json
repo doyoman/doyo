@@ -28,28 +28,28 @@
       "settings": [
         {
           "id": "heliang_phone",
-          "name": "",
+          "name": "heliang_phone",
           "val": "",
           "type": "text",
           "desc": ""
         },
         {
           "id": "heliang_passwdMD5",
-          "name": "",
+          "name": "heliang_passwdMD5",
           "val": "",
           "type": "text",
           "desc": ""
         },
         {
           "id": "ks_cookie",
-          "name": "",
+          "name": "ks_cookie",
           "val": "",
           "type": "text",
           "desc": ""
         },
         {
           "id": "keywords",
-          "name": "",
+          "name": "keywords",
           "val": "",
           "type": "text",
           "desc": ""
