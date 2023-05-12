@@ -20,6 +20,44 @@
       "author": "@doyo",
       "repo": "https://github.com/doyoman/doyo",
       "script": "https://raw.githubusercontent.com/doyoman/doyo/main/aliyundrive_sharelink_monitor.js"
+    },
+    {
+      "id": "doyo",
+      "name": "My Env",
+			"keys": ["heliang_phone", "heliang_passwdMD5", "ks_cookie", "keywords"],
+      "settings": [
+        {
+          "id": "heliang_phone",
+          "name": "",
+          "val": "",
+          "type": "text",
+          "desc": ""
+        },
+        {
+          "id": "heliang_passwdMD5",
+          "name": "",
+          "val": "",
+          "type": "text",
+          "desc": ""
+        },
+        {
+          "id": "ks_cookie",
+          "name": "",
+          "val": "",
+          "type": "text",
+          "desc": ""
+        },
+        {
+          "id": "keywords",
+          "name": "",
+          "val": "",
+          "type": "text",
+          "desc": ""
+        }
+      ],
+      "author": "@doyo",
+      "repo": "https://github.com/doyoman/doyo",
+      "script": ""
     }
   ]
 }
