@@ -24,7 +24,7 @@
     {
       "id": "doyo",
       "name": "My Env",
-			"keys": ["heliang_phone", "heliang_passwdMD5", "ks_cookie", "keywords"],
+			"keys": ["heliang_phone", "heliang_passwdMD5", "heliang_token", "ks_keyword", "ks_cookie"],
       "settings": [
         {
           "id": "heliang_phone",
@@ -41,15 +41,22 @@
           "desc": ""
         },
         {
-          "id": "ks_cookie",
-          "name": "ks_cookie",
+          "id": "heliang_token",
+          "name": "heliang_token",
           "val": "",
           "type": "text",
           "desc": ""
         },
         {
-          "id": "keywords",
-          "name": "keywords",
+          "id": "ks_keyword",
+          "name": "ks_keyword",
+          "val": "",
+          "type": "text",
+          "desc": ""
+        },
+        {
+          "id": "ks_cookie",
+          "name": "ks_cookie",
           "val": "",
           "type": "text",
           "desc": ""
