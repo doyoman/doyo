@@ -5,48 +5,10 @@
   "repo": "https://github.com/doyoman/doyo",
   "apps": [
     {
-      "id": "aliyun",
-      "name": "aliyun 监控",
-      "keys": ["share_links"],
-      "settings": [
-        {
-          "id": "share_links",
-          "name": "aliyun分享链接",
-          "val": "",
-          "type": "text",
-          "desc": "aliyun链接，多个链接用&隔开"
-        }
-      ],
-      "author": "@doyo",
-      "repo": "https://github.com/doyoman/doyo",
-      "script": "https://raw.githubusercontent.com/doyoman/doyo/main/aliyundrive_sharelink_monitor.js"
-    },
-    {
       "id": "doyo",
       "name": "My Env",
-			"keys": ["heliang_phone", "heliang_passwdMD5", "heliang_token", "ks_keyword", "ks_cookie"],
+			"keys": ["ks_keyword", "ks_cookies"],
       "settings": [
-        {
-          "id": "heliang_phone",
-          "name": "heliang_phone",
-          "val": "",
-          "type": "text",
-          "desc": ""
-        },
-        {
-          "id": "heliang_passwdMD5",
-          "name": "heliang_passwdMD5",
-          "val": "",
-          "type": "text",
-          "desc": ""
-        },
-        {
-          "id": "heliang_token",
-          "name": "heliang_token",
-          "val": "",
-          "type": "text",
-          "desc": ""
-        },
         {
           "id": "ks_keyword",
           "name": "ks_keyword",
@@ -55,8 +17,8 @@
           "desc": ""
         },
         {
-          "id": "ks_cookie",
-          "name": "ks_cookie",
+          "id": "ks_cookies",
+          "name": "ks_cookies",
           "val": "",
           "type": "text",
           "desc": ""
