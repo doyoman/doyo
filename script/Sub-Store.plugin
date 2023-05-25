@@ -10,7 +10,7 @@
 DOMAIN, sub-store.vercel.app, PROXY
 
 [Script]
-http-request https?:\/\/sub\.store script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/main/Resource/Script/Sub-Store/sub-store_core_cache.js, requires-body = true, timeout = 20000, tag = Sub-Store Core
+http-request https?:\/\/sub\.store script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/main/Resource/Script/Sub-Store/sub-store_core_cache.js, requires-body = true, timeout = 100000, tag = Sub-Store Core
 
 cron "0 0 * * *" script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/main/Resource/Script/Sub-Store/cron-sync-artifacts.min.js, tag = Sub-Store Sync
 
