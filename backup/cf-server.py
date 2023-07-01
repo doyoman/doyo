@@ -60,28 +60,34 @@ def main(parameter):
     
     def get_sub(url):
         rsp = requests.get(url)
-        b_list = base64.b64decode(rsp.text)
-        list = str(b_list, "utf-8").strip().split("\n")
+        b_list = base64.b64decode(rsp.text).decode('utf-8')
+        fl_list = keep_vmess_lines(b_list)
+        list = fl_list.strip().split("\n")
         # print(list)
         return list
+    
+    def keep_vmess_lines(text):
+        lines = text.split('\n')
+        filtered_lines = [line for line in lines if line.startswith('vmess://')]
+        return '\n'.join(filtered_lines)
 
     def re_vmess(vmess):
         SW = []
         if LT_list:
-            dic1 = json.loads(str(base64.b64decode(vmess[8:]), "utf-8"))
+            dic1 = json.loads((base64.b64decode(vmess[8:])).decode('utf-8'))
             dic1["add"] = choice(LT_list)
             dic1["ps"] = dic1["ps"] + "-联通优选"
             
             SW.append("vmess://" + str(base64.b64encode(json.dumps(dic1, ensure_ascii=False).encode()), "utf-8"))
         
         if DX_list:
-            dic2 = json.loads(str(base64.b64decode(vmess[8:]), "utf-8"))
+            dic2 = json.loads((base64.b64decode(vmess[8:])).decode('utf-8'))
             dic2["add"] = choice(DX_list)
             dic2["ps"] = dic2["ps"] + "-电信优选"
             SW.append("vmess://" + str(base64.b64encode(json.dumps(dic2, ensure_ascii=False).encode()), "utf-8"))
         
         if YD_list:
-            dic3 = json.loads(str(base64.b64decode(vmess[8:]), "utf-8"))
+            dic3 = json.loads((base64.b64decode(vmess[8:])).decode('utf-8'))
             dic3["add"] = choice(YD_list)
             dic3["ps"] = dic3["ps"] + "-移动优选"
             SW.append("vmess://" + str(base64.b64encode(json.dumps(dic3, ensure_ascii=False).encode()), "utf-8"))
