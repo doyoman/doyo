@@ -1,9 +1,11 @@
 #!name=ouo机场签到
-#!desc=ouo机场签到，需在boxjs中设置邮箱和密码，boxjs订阅请点击👇👇👇
-#!openUrl = https://raw.githubusercontent.com/doyoman/doyo/main/backup/doyo.boxjs.json
+#!desc=ouo机场签到，需点击插件设置邮箱和密码
+#!openUrl = 
 #!author = doyo
 #!homepage = 
 #!icon = 
+#!input = ouoEmail
+#!input = ouoPwd
 #!date = 2023-10-28 22:30:01
 
 [Script]
