@@ -1,5 +1,5 @@
 #!name=ouo机场签到
-#!desc=ouo机场签到
+#!desc=ouo机场签到，需在boxjs中设置邮箱和密码，boxjs订阅请点击👇👇👇
 #!openUrl = https://raw.githubusercontent.com/doyoman/doyo/main/backup/doyo.boxjs.json
 #!author = doyo
 #!homepage = 
