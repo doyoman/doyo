@@ -27,6 +27,29 @@
       "author": "@doyo",
       "repo": "https://github.com/doyoman/doyo",
       "script": ""
+    },{
+      "id": "ouo",
+      "name": "ouo机场签到",
+			"keys": ["ouoEmail", "ouoPwd"],
+      "settings": [
+        {
+          "id": "ouoEmail",
+          "name": "ouoEmail",
+          "val": "",
+          "type": "text",
+          "desc": "机场登录邮箱"
+        },
+        {
+          "id": "ouoPwd",
+          "name": "ouoPwd",
+          "val": "",
+          "type": "text",
+          "desc": "机场登录密码"
+        }
+      ],
+      "author": "@doyo",
+      "repo": "https://github.com/doyoman/doyo",
+      "script": "https://raw.githubusercontent.com//doyoman/doyo/main/script/ouo-checkin.js"
     }
   ]
 }

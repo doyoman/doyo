@@ -1,0 +1,10 @@
+#!name=ouo机场签到
+#!desc=ouo机场签到
+#!openUrl = 
+#!author = doyo
+#!homepage = 
+#!icon = 
+#!date = 2023-10-28 22:30:01
+
+[Script]
+cron "17 9 * * *" script-path = https://raw.githubusercontent.com//doyoman/doyo/main/script/ouo-checkin.js, tag = ouo机场签到, enable = true
