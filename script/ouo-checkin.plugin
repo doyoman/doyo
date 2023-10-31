@@ -3,7 +3,7 @@
 #!openUrl = 
 #!author = doyo
 #!homepage = 
-#!icon = 
+#!icon = https://raw.githubusercontent.com/doyoman/doyo/main/icon/OUO.png
 #!input = ouoEmail
 #!input = ouoPwd
 #!date = 2023-10-28 22:30:01
