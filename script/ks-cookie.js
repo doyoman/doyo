@@ -2,6 +2,7 @@ const $ = new Env("快手获取cookie");
 
 !(async () => {
     if (!$.isNode() && typeof $request !== "undefined") {
+        let msg 
         console.log("获取快手cookie操作...");
         let cookies = $request.headers.Cookie || $request.headers.cookie;
 
@@ -19,20 +20,23 @@ const $ = new Env("快手获取cookie");
                     add = false
                     old_ks_cookies[old_ks_cookies.indexOf(i)] = `${userId};${login_identity};${dsp_agent_st};`;
                     $.setjson(old_ks_cookies, "ks_cookies");
+                    msg = "🎉🎉🎉快手更新cookie成功！"
                 }
             }
 
             if (add) {
                 old_ks_cookies.push(`${userId};${login_identity};${dsp_agent_st};`);
                 $.setjson(old_ks_cookies, "ks_cookies");
+                msg = "🎉🎉🎉快手新增cookie成功！"
             }
 
         } else {
             let ks_cookies = [];
             ks_cookies.push(`${userId};${login_identity};${dsp_agent_st};`);
             $.setjson(ks_cookies, "ks_cookies");
+            msg = "🎉🎉🎉快手首个cookie写入成功！"
         }
-        $.msg($.name, "🎉快手cookie获取成功！");
+        $.msg($.name, msg);
     }
 })()
     .catch(async (e) => {
