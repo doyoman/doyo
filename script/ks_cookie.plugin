@@ -3,7 +3,7 @@
 #!icon=
 
 [Script]
-http-request (https\:\/\/agent\.e\.kuaishou\.com\/rest\/dsp\/agent\/account\/data\/v2\/queryDataReport|https\:\/\/zilla\.heliang\.cc\/api\/wxmall\/order\/getOrderCount) script-path=https://raw.githubusercontent.com/doyoman/scripts/main/task/ks-lite.jsenhanced-github, timeout=10, enabled=true, tag=获取快手cookie
+http-request (https\:\/\/agent\.e\.kuaishou\.com\/rest\/dsp\/agent\/account\/data\/v2\/queryDataReport|https\:\/\/zilla\.heliang\.cc\/api\/wxmall\/order\/getOrderCount) script-path=https://raw.githubusercontent.com/doyoman/doyo/main/script/ks-cookie.js, timeout=10, enabled=true, tag=获取快手cookie
 
 [MITM]
 hostname = agent.e.kuaishou.com
