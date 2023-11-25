@@ -1,2 +1,4 @@
 payload:
   - DOMAIN-SUFFIX,eu.org
+  - DOMAIN-SUFFIX,shucdn.com
+  - DOMAIN-SUFFIX,ulogs.umeng.com
