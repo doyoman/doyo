@@ -7,3 +7,4 @@ payload:
   - DOMAIN-SUFFIX,zero.marisalnc.com
   - DOMAIN-SUFFIX,python.org
   - DOMAIN-SUFFIX,docker.com
+  - IP-CIDR,198.41.128.0/17,no-resolve
