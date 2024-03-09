@@ -1,0 +1,9 @@
+#!name=获取腾讯headers
+#!desc=获取腾讯headers
+#!icon=
+
+[Script]
+http-request (https\:\/\/ad\.qq\.com\/bff\/proxy\/gdt-api\/ad_manage\/v1\/dpmanage\/get_integrated_list_upgrade) script-path=https://raw.githubusercontent.com/doyoman/doyo/main/script/tx_headers.js, timeout=10, enabled=true, tag=获取腾讯headers
+
+[MITM]
+hostname = ad.qq.com
