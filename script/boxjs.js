@@ -824,7 +824,9 @@ async function apiRunScript() {
   } else {
     script_text = opts.script
   }
-  script_text = `globalThis.$argument = "${opts.argument}";${script_text}`
+  if (opts.argument) {
+    script_text = `globalThis.$argument = "${opts.argument}";${script_text}`
+  }
   if (
     $.isSurge() &&
     !$.isLoon() &&
