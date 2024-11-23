@@ -58,7 +58,7 @@
 
   
   "outbounds": [
-    { "tag": "Proxy", "type": "selector", "outbounds": ["香港", "日本", "台湾", "美国", "新加坡", "手动切换", "自动选择", "直连"] },
+    { "tag": "Proxy", "type": "selector", "outbounds": ["自动选择", "香港", "日本", "台湾", "美国", "新加坡", "手动切换", "直连"] },
     { "tag": "YouTube", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
     { "tag": "OpenAI", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
     { "tag": "Google", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
