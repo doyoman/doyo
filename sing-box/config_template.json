@@ -15,7 +15,7 @@
     },
   "dns": {
     "servers": [
-      {"tag": "proxyDns", "address": "tls://8.8.8.8", "address_resolver": "localDns", "address_strategy": "ipv4_only", "detour": "默认"},
+      {"tag": "proxyDns", "address": "tls://8.8.8.8", "address_resolver": "localDns", "address_strategy": "ipv4_only", "detour": "Proxy"},
       {"tag": "localDns", "address": "223.5.5.5", "detour": "直连"},
       {"tag": "block", "address": "rcode://success"}
     ],
@@ -58,14 +58,14 @@
 
   
   "outbounds": [
-    { "tag": "默认", "type": "selector", "outbounds": ["香港", "日本", "台湾", "美国", "新加坡", "手动切换", "自动选择", "直连"] },
-    { "tag": "YouTube", "type": "selector", "outbounds": ["默认", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
-    { "tag": "OpenAI", "type": "selector", "outbounds": ["默认", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
-    { "tag": "Google", "type": "selector", "outbounds": ["默认", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
-    { "tag": "Telegram", "type": "selector", "outbounds": ["默认", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
-    { "tag": "Netflix", "type": "selector", "outbounds": ["默认", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
-    { "tag": "Microsoft", "type": "selector", "outbounds": ["直连", "默认"] },
-    { "tag": "Apple", "type": "selector", "outbounds": ["直连", "默认"] },
+    { "tag": "Proxy", "type": "selector", "outbounds": ["香港", "日本", "台湾", "美国", "新加坡", "手动切换", "自动选择", "直连"] },
+    { "tag": "YouTube", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
+    { "tag": "OpenAI", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
+    { "tag": "Google", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
+    { "tag": "Telegram", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
+    { "tag": "Netflix", "type": "selector", "outbounds": ["Proxy", "香港", "日本", "台湾", "美国", "新加坡", "手动切换"] },
+    { "tag": "Microsoft", "type": "selector", "outbounds": ["直连", "Proxy"] },
+    { "tag": "Apple", "type": "selector", "outbounds": ["直连", "Proxy"] },
     
     { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"]},
 
@@ -91,18 +91,18 @@
       { "clash_mode": "direct", "outbound": "直连" },
       { "clash_mode": "global", "outbound": "GLOBAL" },
       { "domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one", "git.doyokey.eu.org", "mobgi.com", "btschool.club", "oceanengine.com", "bytegoofy.com", "bytescm.com", "byteadverts.com", "bytecdntp.com", "ibytedapm.com", "bytednsdoc.com", "bytehwm.com", "byteimg.com", "byted-static.com", "zijieapi.com", "edge-byted.com", "byteacctimg.com"], "outbound": "直连" },
-      { "domain": ["serv00.net", "madouqu.com", "duckduckgo.com", "metacubex.one"], "outbound": "默认" },
+      { "domain": ["serv00.net", "madouqu.com", "duckduckgo.com", "metacubex.one"], "outbound": "Proxy" },
       { "ip_is_private": true, "outbound": "直连" },
       { "rule_set": "geosite-openai", "outbound": "OpenAI" },
       { "rule_set": "geosite-youtube", "outbound": "YouTube" },
       { "rule_set": ["geoip-google", "geosite-google"], "outbound": "Google" },
-      { "rule_set": "geosite-github", "outbound": "默认" },
-      { "rule_set": "geosite-docker", "outbound": "默认" },
+      { "rule_set": "geosite-github", "outbound": "Proxy" },
+      { "rule_set": "geosite-docker", "outbound": "Proxy" },
       { "rule_set": ["geoip-telegram", "geosite-telegram"], "outbound": "Telegram" },
       { "rule_set": ["geoip-netflix", "geosite-netflix"], "outbound": "Netflix" },
       { "rule_set": ["geoip-apple", "geosite-apple"], "outbound": "Apple" },
       { "rule_set": "geosite-microsoft", "outbound": "Microsoft" },      
-      { "rule_set": "geosite-geolocation-!cn", "outbound": "默认" },
+      { "rule_set": "geosite-geolocation-!cn", "outbound": "Proxy" },
       { "rule_set": ["geoip-cn", "geosite-cn"], "outbound": "直连" }
     ],
     
