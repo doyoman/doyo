@@ -18,12 +18,24 @@ let proxies = await produceArtifact({
 config.outbounds.map(i => {
   if ("outbounds" in i && i.outbounds.includes("{all}") && "filter" in i) {
     i.outbounds = i.outbounds.filter(item => item != "{all}" && item != "block");
-    const p = getTags(proxies, i.filter[0].keywords[0]);
-    if (i.filter[0].action == "include") {
-      i.outbounds.push(...p);
-    } else if (i.filter[0].action == "exclude") {
-      i.outbounds.push(...(getTags(proxies).filter(item => !p.includes(item))));
+
+    let include_rule = i.filter.find(a => a.action == "include");
+    let exclude_rule = i.filter.find(a => a.action == "exclude");
+
+    let p;
+    if (include_rule && exclude_rule) {
+      let a = getTags(proxies, include_rule.keywords[0], true);
+      let b = getTags(a, exclude_rule.keywords[0]);
+      p = a.map(c => c.tag).filter(item => !b.includes(item));
+    } else if (include_rule) {
+      p = getTags(proxies, include_rule.keywords[0]);
+    } else if (exclude_rule) {
+      let a = getTags(proxies);
+      let b = getTags(proxies, exclude_rule.keywords[0]);
+      p = a.filter(item => !b.includes(item));
     }
+
+    i.outbounds.push(...p);
     delete i.filter;
   } else if ("outbounds" in i && i.outbounds.includes("{all}") && !("filter" in i)) {
     i.outbounds = i.outbounds.filter(item => item != "{all}");
@@ -45,9 +57,13 @@ config.outbounds.forEach(outbound => {
 
 $content = JSON.stringify(config, null, 2);
 
-function getTags(proxies, regex) {
+function getTags(proxies, regex, noTag = false) {
   if (regex) {
     regex = new RegExp(regex);
   }
-  return (regex ? proxies.filter(p => regex.test(p.tag)) : proxies).map(p => p.tag);
+  if (noTag) {
+    return (regex ? proxies.filter(p => regex.test(p.tag)) : proxies);
+  } else {
+    return (regex ? proxies.filter(p => regex.test(p.tag)) : proxies).map(p => p.tag);
+  }
 }
