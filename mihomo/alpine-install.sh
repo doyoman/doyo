@@ -7,9 +7,6 @@ fi
 
 echo "当前系统为 Alpine Linux，继续执行脚本..."
 
-apk update
-apk add jq
-
 ARCH=$(uname -m)
 case $ARCH in
 x86_64)
@@ -23,6 +20,9 @@ aarch64)
     exit 1
     ;;
 esac
+
+apk update
+apk add jq
 
 if [ -z "$1" ]; then
     echo "自定义 GitHub 反代 url 不存在，将直连GitHub。"
@@ -65,9 +65,21 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+MIHOMO_DIR="/etc/mihomo"
+if [ ! -d "$MIHOMO_DIR" ]; then
+    mkdir -p "$MIHOMO_DIR"
+    echo "文件夹 $MIHOMO_DIR 已创建。"
+else
+    echo "文件夹 $MIHOMO_DIR 已存在。"
+fi
+wget -O $MIHOMO_DIR/config.yaml ${PROXY_URL}https://raw.githubusercontent.com/MetaCubeX/Meta-Docs/refs/heads/main/docs/example/mrs
+if [ $? -ne 0 ]; then
+    echo -e "config.yaml 下载失败。问题不大。自行把配置文件放到${MIHOMO_DIR}下，命名为config.yaml即可。\n也可以使用 GitHub 反代运行脚本试试！只需在脚本后增加反代url参数即可！\n免费公共反代：\nhttps://gh-proxy.com/"
+fi
+
 chmod +x /etc/init.d/mihomo
 
 rc-update add mihomo default
 rc-status | grep mihomo
 
-echo -e "现在把你的 mihomo 配置文件(config.yaml)放到 /etc/mihomo/ 路径下，然后用以下命令启动\n /etc/init.d/mihomo start\n即可享用！"
+echo -e "现在把你的 mihomo 配置文件(config.yaml)放到${MIHOMO_DIR}路径下，或者自行修改${MIHOMO_DIR}/config.yaml文件即可用以下命令启动mihomo\n /etc/init.d/mihomo start\n"
