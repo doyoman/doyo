@@ -15,10 +15,7 @@ case $ARCH in
 x86_64)
     ARCH_TAG="amd64"
     ;;
-i386)
-    ARCH_TAG="386"
-    ;;
-arm64)
+aarch64)
     ARCH_TAG="arm64"
     ;;
 *)
