@@ -27,7 +27,7 @@ case $ARCH in
         ;;
 esac
 
-LATEST_TAG=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | jq -r .tag_name)
+LATEST_TAG=$(wget -qO- https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | jq -r .tag_name)
 
 if [ -z "$LATEST_TAG" ]; then
     echo "无法获取最新的 tag"
@@ -36,9 +36,10 @@ fi
 
 echo "最新的 tag: $LATEST_TAG"
 
+rm -rf /tmp/mihomo*
 wget -O /tmp/mihomo.gz https://github.com/MetaCubeX/mihomo/releases/download/$LATEST_TAG/mihomo-linux-$ARCH_TAG-compatible-go120-$LATEST_TAG.gz
 gzip -d /tmp/mihomo.gz
-mv mihomo /usr/bin/mihomo
+mv /tmp/mihomo /usr/bin/mihomo
 chmod +x /usr/bin/mihomo
 
 mihomo -v
@@ -58,4 +59,4 @@ fi
 rc-update add mihomo default
 rc-status | grep mihomo
 
-echo "现在把你的 mihomo 配置文件(config.yaml)放到 /etc/mihomo/ 路径下，然后用以下命令启动\n /etc/init.d/mihomo start\n 即可享用！"
+echo -e "现在把你的 mihomo 配置文件(config.yaml)放到 /etc/mihomo/ 路径下，然后用以下命令启动\n /etc/init.d/mihomo start\n 即可享用！"
