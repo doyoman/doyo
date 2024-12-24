@@ -35,12 +35,14 @@ if [ -z "$LATEST_TAG" ]; then
 fi
 
 echo "最新的 tag: $LATEST_TAG"
+MIHOMO_PKG=mihomo-linux-$ARCH_TAG-compatible-go120-$LATEST_TAG
 
 rm -rf /tmp/mihomo*
-wget -O /tmp/mihomo.gz https://github.com/MetaCubeX/mihomo/releases/download/$LATEST_TAG/mihomo-linux-$ARCH_TAG-compatible-go120-$LATEST_TAG.gz
-gzip -d /tmp/mihomo.gz
-mv /tmp/mihomo /usr/bin/mihomo
+wget -O /tmp/$MIHOMO_PKG.gz https://github.com/MetaCubeX/mihomo/releases/download/$LATEST_TAG/$MIHOMO_PKG.gz
+gzip -d /tmp/$MIHOMO_PKG.gz
+mv /tmp/$MIHOMO_PKG /usr/bin/mihomo
 chmod +x /usr/bin/mihomo
+rm -rf /tmp/mihomo*
 
 mihomo -v
 if [ $? -ne 0 ]; then
