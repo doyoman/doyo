@@ -59,4 +59,4 @@ fi
 rc-update add mihomo default
 rc-status | grep mihomo
 
-echo -e "现在把你的 mihomo 配置文件(config.yaml)放到 /etc/mihomo/ 路径下，然后用以下命令启动\n /etc/init.d/mihomo start\n 即可享用！"
+echo -e "现在把你的 mihomo 配置文件(config.yaml)放到 /etc/mihomo/ 路径下，然后用以下命令启动\n /etc/init.d/mihomo start\n即可享用！"
