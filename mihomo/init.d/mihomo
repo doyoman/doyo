@@ -1,0 +1,39 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+description="mihomo service"
+supervisor="supervise-daemon"
+command="/usr/bin/mihomo"
+extra_started_commands="reload checkconfig"
+
+: ${MIHOMO_CONFIG="/etc/mihomo"}
+
+if [ -d "$MIHOMO_CONFIG" ]; then
+        _config_opt="$MIHOMO_CONFIG"
+elif [ -z "$MIHOMO_CONFIG" ]; then
+        _config_opt=""
+else
+        _config_opt="-config $MIHOMO_CONFIG"
+fi
+
+command_args="-d $_config_opt"
+
+depend() {
+        after net dns
+}
+
+checkconfig() {
+        ebegin "Checking $RC_SVCNAME configuration"
+        mihomo -t -d $_config_opt
+        eend $?
+}
+
+start_pre() {
+        checkconfig
+}
+
+reload() {
+        ebegin "Reloading $RC_SVCNAME"
+        checkconfig && $supervisor "$RC_SVCNAME" --signal HUP
+        eend $?
+}
