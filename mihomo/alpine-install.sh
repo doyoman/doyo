@@ -12,51 +12,62 @@ apk add jq
 
 ARCH=$(uname -m)
 case $ARCH in
-    x86_64)
-        ARCH_TAG="amd64"
-        ;;
-    i386)
-        ARCH_TAG="386"
-        ;;
-    arm64)
-        ARCH_TAG="arm64"
-        ;;
-    *)
-        echo "不支持的架构: $ARCH"
-        exit 1
-        ;;
+x86_64)
+    ARCH_TAG="amd64"
+    ;;
+i386)
+    ARCH_TAG="386"
+    ;;
+arm64)
+    ARCH_TAG="arm64"
+    ;;
+*)
+    echo "不支持的架构: $ARCH"
+    exit 1
+    ;;
 esac
+
+if [ -z "$1" ]; then
+    echo "自定义 GitHub 反代 url 不存在，将直连GitHub。"
+else
+    if [[ "$1" == */ ]]; then
+        PROXY_URL=$1
+    else
+        PROXY_URL="$1/"
+    fi
+    echo "自定义 GitHub 反代 url：$PROXY_URL"
+fi
 
 LATEST_TAG=$(wget -qO- https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | jq -r .tag_name)
 
 if [ -z "$LATEST_TAG" ]; then
-    echo "无法获取最新的 tag"
-    exit 1
+    echo "无法获取最新的 tag，采用默认 tag v1.19.0"
+    LATEST_TAG="v1.19.0"
 fi
 
 echo "最新的 tag: $LATEST_TAG"
 MIHOMO_PKG=mihomo-linux-$ARCH_TAG-compatible-go120-$LATEST_TAG
 
 rm -rf /tmp/mihomo*
-wget -O /tmp/$MIHOMO_PKG.gz https://github.com/MetaCubeX/mihomo/releases/download/$LATEST_TAG/$MIHOMO_PKG.gz
+wget -O /tmp/$MIHOMO_PKG.gz ${PROXY_URL}https://github.com/MetaCubeX/mihomo/releases/download/$LATEST_TAG/$MIHOMO_PKG.gz
+if [ $? -ne 0 ]; then
+    echo -e "mihomo安装出错。或许是你的网络环境不行，使用 GitHub 反代运行脚本试试！只需在脚本后增加反代url参数即可！\n免费公共反代：\nhttps://gh-proxy.com/"
+    exit 1
+fi
+
 gzip -d /tmp/$MIHOMO_PKG.gz
 mv /tmp/$MIHOMO_PKG /usr/bin/mihomo
 chmod +x /usr/bin/mihomo
 rm -rf /tmp/mihomo*
-
 mihomo -v
+
+wget -O /etc/init.d/mihomo ${PROXY_URL}https://raw.githubusercontent.com/doyoman/doyo/refs/heads/main/mihomo/init.d/mihomo
 if [ $? -ne 0 ]; then
-    echo "mihomo安装出错。请重试！"
+    echo -e "init.d 脚本安装出错。或许是你的网络环境不行，使用 GitHub 反代运行脚本试试！只需在脚本后增加反代url参数即可！\n免费公共反代：\nhttps://gh-proxy.com/"
     exit 1
 fi
 
-wget -O /etc/init.d/mihomo https://raw.githubusercontent.com/doyoman/doyo/refs/heads/main/mihomo/init.d/mihomo
 chmod +x /etc/init.d/mihomo
-
-if [ $? -ne 0 ]; then
-    echo "init.d 脚本安装出错。请重试！"
-    exit 1
-fi
 
 rc-update add mihomo default
 rc-status | grep mihomo
