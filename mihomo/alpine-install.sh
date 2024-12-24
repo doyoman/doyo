@@ -41,11 +41,12 @@ fi
 LATEST_TAG=$(wget -qO- https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | jq -r .tag_name)
 
 if [ -z "$LATEST_TAG" ]; then
-    echo "无法获取最新的 tag，采用默认 tag v1.19.0"
     LATEST_TAG="v1.19.0"
+    echo "无法获取最新的 tag，采用默认 tag：$LATEST_TAG"
+else
+    echo "获取到最新的 tag: $LATEST_TAG"
 fi
 
-echo "最新的 tag: $LATEST_TAG"
 MIHOMO_PKG=mihomo-linux-$ARCH_TAG-compatible-go120-$LATEST_TAG
 
 rm -rf /tmp/mihomo*
