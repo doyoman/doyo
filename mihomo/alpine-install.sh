@@ -64,6 +64,7 @@ if [ $? -ne 0 ]; then
     echo -e "init.d 脚本安装出错。或许是你的网络环境不行，使用 GitHub 反代运行脚本试试！只需在脚本后增加反代url参数即可！\n免费公共反代：\nhttps://gh-proxy.com/"
     exit 1
 fi
+chmod +x /etc/init.d/mihomo
 
 MIHOMO_DIR="/etc/mihomo"
 if [ ! -d "$MIHOMO_DIR" ]; then
@@ -77,7 +78,28 @@ if [ $? -ne 0 ]; then
     echo -e "config.yaml 下载失败。问题不大。自行把配置文件放到${MIHOMO_DIR}下，命名为config.yaml即可。\n也可以使用 GitHub 反代运行脚本试试！只需在脚本后增加反代url参数即可！\n免费公共反代：\nhttps://gh-proxy.com/"
 fi
 
-chmod +x /etc/init.d/mihomo
+UI_TAG=$(wget -qO- https://api.github.com/repos/MetaCubeX/metacubexd/releases/latest | jq -r .tag_name)
+if [ -z "$UI_TAG" ]; then
+    UI_TAG="v1.152.0"
+    echo "无法获取最新的 tag，采用默认 tag：$UI_TAG"
+else
+    echo "获取到最新的 tag: $UI_TAG"
+fi
+
+UI_DIR="/etc/mihomo/ui"
+if [ ! -d "$UI_DIR" ]; then
+    mkdir -p "$UI_DIR"
+    echo "文件夹 $UI_DIR 已创建。"
+else
+    echo "文件夹 $UI_DIR 已存在。"
+fi
+wget -O /tmp/compressed-dist.tgz ${PROXY_URL}https://github.com/MetaCubeX/metacubexd/releases/download/${UI_TAG}/compressed-dist.tgz
+if [ $? -ne 0 ]; then
+    echo -e "metacubexd ui 下载失败。问题不大。自行下载并解压到${UI_DIR}下即可。\n下载地址：https://github.com/MetaCubeX/metacubexd/releases/download/${UI_TAG}/compressed-dist.tgz\n也可以使用 GitHub 反代运行脚本试试！只需在脚本后增加反代url参数即可！\n免费公共反代：\nhttps://gh-proxy.com/"
+else
+    tar -zxf /tmp/compressed-dist.tgz -C $UI_DIR
+    echo "metacubexd ui 下载完成！"
+fi
 
 rc-update add mihomo default
 rc-status | grep mihomo
