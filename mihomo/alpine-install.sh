@@ -81,9 +81,9 @@ fi
 UI_TAG=$(wget -qO- https://api.github.com/repos/MetaCubeX/metacubexd/releases/latest | jq -r .tag_name)
 if [ -z "$UI_TAG" ]; then
     UI_TAG="v1.152.0"
-    echo "无法获取最新的 tag，采用默认 tag：$UI_TAG"
+    echo "无法获取最新的 UI tag，采用默认 tag：$UI_TAG"
 else
-    echo "获取到最新的 tag: $UI_TAG"
+    echo "获取到最新的 UI tag: $UI_TAG"
 fi
 
 UI_DIR="/etc/mihomo/ui"
@@ -99,6 +99,7 @@ if [ $? -ne 0 ]; then
 else
     tar -zxf /tmp/compressed-dist.tgz -C $UI_DIR
     echo "metacubexd ui 下载完成！"
+    rm /tmp/compressed-dist.tgz
 fi
 
 rc-update add mihomo default
