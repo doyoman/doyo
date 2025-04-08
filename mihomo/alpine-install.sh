@@ -44,7 +44,7 @@ else
     echo "获取到最新的 tag: $LATEST_TAG"
 fi
 
-MIHOMO_PKG=mihomo-linux-$ARCH_TAG-compatible-go120-$LATEST_TAG
+MIHOMO_PKG=mihomo-linux-$ARCH_TAG-$LATEST_TAG
 
 rm -rf /tmp/mihomo*
 wget -O /tmp/$MIHOMO_PKG.gz ${PROXY_URL}https://github.com/MetaCubeX/mihomo/releases/download/$LATEST_TAG/$MIHOMO_PKG.gz
